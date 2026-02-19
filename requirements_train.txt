@@ -1,0 +1,7 @@
+# classifier training dependencies
+# python 3.11
+tensorflow==2.15.0
+tensorflow-text==2.15.0
+mediapipe-model-maker
+mediapipe
+playsound

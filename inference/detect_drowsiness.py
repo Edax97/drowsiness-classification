@@ -1,0 +1,40 @@
+import time
+
+from cv_camera import view_cam, text_overlay
+import cv2 as cv
+
+from alert import alert_detection
+from classifier_run import create_clasifier
+from classify_eyes import classify_eyes, DROWSY_CLASS, AWAKE_CLASS
+from detection_header import Detection_Header
+from face_det_mp import detect_face_mp
+
+last_time = 0
+if __name__ == "__main__":
+
+    classifier = create_clasifier("eyes_model/en0_eye_a.tflite", 0.6)
+    detector = Detection_Header(DROWSY_CLASS, AWAKE_CLASS)
+
+    def process_frame(frame: cv.Mat) -> cv.Mat:
+        global last_time
+        detected, (x, y, w, h), (l_x, l_y, l_x1, l_y1), (r_x, r_y, r_x1, r_y1) = detect_face_mp(frame)
+        if not detected:
+            text_overlay(frame, "No face", (60, 20))
+            return frame
+
+        time_ms = int(1000 * time.time())
+        if time_ms - last_time > 500:
+            last_time = time_ms
+            left_roi = frame[l_y:l_y1, l_x:l_x1].copy()
+            right_roi = frame[r_y:r_y1, r_x:r_x1].copy()
+            status = classify_eyes(classifier, left_roi, right_roi)
+            status = detector.set_status(status)
+            alert_detection(status)
+        drowsy_status = detector.get_status()
+        output = cv.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
+        cv.rectangle(output, (l_x, l_y), (l_x1, l_y1), (255, 0, 0), 2)
+        cv.rectangle(output, (r_x, r_y), (r_x1, r_y1), (255, 0, 0), 2)
+        text_overlay(frame, f"Estado: {drowsy_status}", (20, 40))
+        return output
+
+    view_cam("Fatiga", "videos/sleep2.mp4", process_frame)

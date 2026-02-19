@@ -1,0 +1,13 @@
+/videos/
+/classification/.exported*
+/classification/exported*
+/classification/datasets/
+
+/eye-classification/face-model/
+/eye-classification/FL3D-eyes/
+/eye-classification/FL3D-eyesbig/
+/eye-classification/MRL/
+/eye-classification/eye-classifier-a/
+/classifier-exported/
+/inference/*.png
+/test/*.test
