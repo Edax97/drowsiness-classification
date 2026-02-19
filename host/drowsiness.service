@@ -1,0 +1,13 @@
+[Unit]
+Description=Run drowsyness
+Wants=network-online.target
+
+[Service]
+Type=exec
+Environment=PATH=/usr/bin:/bin:/usr/local/bin
+ExecStart=/usr/local/bin/start_drowsiness.sh
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
