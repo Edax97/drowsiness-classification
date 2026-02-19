@@ -1,3 +1,4 @@
+import os
 import time
 
 from cv_camera import view_cam, text_overlay
@@ -37,4 +38,5 @@ if __name__ == "__main__":
         text_overlay(frame, f"Estado: {drowsy_status}", (20, 40))
         return output
 
-    view_cam("Fatiga", "videos/sleep2.mp4", process_frame)
+    device_id = os.getenv("DEVICE") if os.getenv("DEVICE") else 0
+    view_cam("Fatiga", device_id, process_frame)
