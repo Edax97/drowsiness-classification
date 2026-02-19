@@ -39,4 +39,4 @@ if __name__ == "__main__":
         return output
 
     device_id = os.getenv("DEVICE") if os.getenv("DEVICE") else 0
-    view_cam("Fatiga", device_id, process_frame)
+    view_cam("Fatiga", int(device_id), process_frame)
