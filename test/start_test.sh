@@ -6,12 +6,13 @@ END_TEST_MP3="./assets/test_end.mp3"
 
 declare -i TEST_LEN TEST_START_TIME MICROSLEEP_LEN
 declare DROWSY_DET_FILE AWAKE_DET_FILE
+source /usr/local/etc/.env
 touch "$DROWSY_DET_FILE" "$AWAKE_DET_FILE"
 
 TEST_FILE="$(date).test"
 touch "$TEST_FILE"
 
-TEST_LEN=60
+TEST_LEN=300
 MICROSLEEP_LEN=4
 TEST_START_TIME=$(date +%s)
 
