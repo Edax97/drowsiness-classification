@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Drowsiness
+Comment=Run drowsiness app
+Exec=/usr/local/bin/start_drowsiness.sh
+Terminal=true
+Categories=Utility;
