@@ -6,7 +6,6 @@ END_TEST_MP3="./assets/test_end.mp3"
 
 declare -i TEST_LEN TEST_START_TIME MICROSLEEP_LEN
 declare DROWSY_DET_FILE AWAKE_DET_FILE
-source .env
 touch "$DROWSY_DET_FILE" "$AWAKE_DET_FILE"
 
 TEST_FILE="$(date).test"
