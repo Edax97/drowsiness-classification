@@ -13,7 +13,7 @@ awake_det_file = os.getenv("AWAKE_DET_FILE")
 def alert_detection(detected: str):
     t = time.localtime()
     if detected == SOMNOLENCIA_DET:
-        subprocess.run(["play", "alerts/alarm-4.wav"])
+        subprocess.Popen(["play", "alerts/alarm-4.wav"])
         #playsound.playsound("alerts/alarm-4.wav", False)
         save_to_file(f"{t.tm_mday}:{t.tm_hour}:{t.tm_min} - {detected}", drowsy_det_file)
     if detected == ALERTA_DET:
