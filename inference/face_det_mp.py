@@ -7,7 +7,7 @@ BaseOptions = mp.tasks.BaseOptions
 VisionRunningMode = mp.tasks.vision.RunningMode
 options = FaceDetectorOptions(
     base_options=BaseOptions(model_asset_path='face-model/blaze_face_short_range.tflite'),
-    min_detection_confidence=0.6,
+    min_detection_confidence=0.67,
     running_mode=VisionRunningMode.IMAGE)
 face_detector = mp.tasks.vision.FaceDetector.create_from_options(options)
 
