@@ -24,7 +24,7 @@ if __name__ == "__main__":
             return frame
 
         time_ms = int(1000 * time.time())
-        if time_ms - last_time > 500:
+        if time_ms - last_time > 200:
             last_time = time_ms
             left_roi = frame[l_y:l_y1, l_x:l_x1].copy()
             right_roi = frame[r_y:r_y1, r_x:r_x1].copy()
