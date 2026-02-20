@@ -44,6 +44,8 @@ def decide_category(_left_category: str, _left_score: float, _right_category: st
         return NO_CLASS
 
     sleep_eye_score = _left_score if _left_category == DROWSY_CLASS else _right_score
+    if sleep_eye_score > awake_eye_score and sleep_eye_score > MIN_ONEEYE_DROWSY_SCORE:
+        return DROWSY_CLASS
     return NO_CLASS
 
 
