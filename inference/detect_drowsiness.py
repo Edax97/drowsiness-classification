@@ -13,7 +13,7 @@ from face_det_mp import detect_face_mp
 last_time = 0
 if __name__ == "__main__":
 
-    classifier = create_clasifier("eyes_model/en0_eye_a.tflite", 0.5)
+    classifier = create_clasifier("eyes_model/en0_eye_a.tflite", 0.55)
     detector = Detection_Header(DROWSY_CLASS, AWAKE_CLASS)
 
     def process_frame(frame: cv.Mat) -> cv.Mat:
