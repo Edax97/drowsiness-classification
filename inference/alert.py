@@ -1,9 +1,9 @@
 import os
 import time
 
-import playsound
+#import playsound
 from dotenv import load_dotenv
-
+import subprocess
 from detection_header import SOMNOLENCIA_DET, ALERTA_DET
 
 load_dotenv()
@@ -13,7 +13,8 @@ awake_det_file = os.getenv("AWAKE_DET_FILE")
 def alert_detection(detected: str):
     t = time.localtime()
     if detected == SOMNOLENCIA_DET:
-        playsound.playsound("alerts/alarm-4.wav", False)
+        subprocess.run(["play", "alerts/alarm-4.wav"])
+        #playsound.playsound("alerts/alarm-4.wav", False)
         save_to_file(f"{t.tm_mday}:{t.tm_hour}:{t.tm_min} - {detected}", drowsy_det_file)
     if detected == ALERTA_DET:
         save_to_file(f"{t.tm_mday}:{t.tm_hour}:{t.tm_min} - {detected}", awake_det_file)
