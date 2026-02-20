@@ -19,7 +19,7 @@ if __name__ == "__main__":
     def process_frame(frame: cv.Mat) -> cv.Mat:
         global last_time
         detected, (x, y, w, h), (l_x, l_y, l_x1, l_y1), (r_x, r_y, r_x1, r_y1) = detect_face_mp(frame)
-        frame = cv.medianBlur(frame, 5)
+        frame = cv.medianBlur(frame, 2)
         if not detected:
             text_overlay(frame, "No face", (60, 20))
             return frame
