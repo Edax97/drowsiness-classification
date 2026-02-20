@@ -13,7 +13,7 @@ from face_det_mp import detect_face_mp
 last_time = 0
 if __name__ == "__main__":
 
-    classifier = create_clasifier("eyes_model/en0_eye_a.tflite", 0.6)
+    classifier = create_clasifier("eyes_model/en0_eye_a.tflite", 0.55)
     detector = Detection_Header(DROWSY_CLASS, AWAKE_CLASS)
 
     def process_frame(frame: cv.Mat) -> cv.Mat:
@@ -24,7 +24,7 @@ if __name__ == "__main__":
             return frame
 
         time_ms = int(1000 * time.time())
-        if time_ms - last_time > 200:
+        if time_ms - last_time > 300:
             last_time = time_ms
             left_roi = frame[l_y:l_y1, l_x:l_x1].copy()
             right_roi = frame[r_y:r_y1, r_x:r_x1].copy()
