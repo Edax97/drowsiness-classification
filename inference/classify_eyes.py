@@ -24,7 +24,7 @@ def classify_eyes(classifier: ImageClassifier, left_img: np.ndarray, right_img: 
 AWAKE_CLASS="awake"
 DROWSY_CLASS="sleepy"
 NO_CLASS=""
-MIN_ONEEYE_AWAKE_SCORE = 0.75
+MIN_ONEEYE_AWAKE_SCORE = 0.68
 MIN_ONEEYE_DROWSY_SCORE = 0.6
 def decide_category(_left_category: str, _left_score: float, _right_category: str, _right_score: float) -> str:
     if _left_category == _right_category:
