@@ -7,7 +7,7 @@ from mediapipe.tasks.python.vision.image_classifier import ImageClassifier
 
 
 MODELPATH="../classifier-exported/en0_D.tflite"
-def create_clasifier(model_path: str=MODELPATH, min_score=0.55) -> ImageClassifier:
+def create_clasifier(model_path: str=MODELPATH,min_score=0.55) -> ImageClassifier:
     options = vision.ImageClassifierOptions(
         base_options=mp.tasks.BaseOptions(model_asset_path=model_path),
         running_mode=vision.RunningMode.IMAGE,
