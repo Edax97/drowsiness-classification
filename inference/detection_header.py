@@ -1,3 +1,5 @@
+import time
+
 SOMNOLENCIA_DET = "somnolencia"
 ALERTA_DET = "alerta"
 INDEFINIDO_DET = ""
