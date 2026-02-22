@@ -12,8 +12,8 @@ touch "$DROWSY_DET_FILE" "$AWAKE_DET_FILE"
 TEST_FILE="$(date).test"
 touch "$TEST_FILE"
 
-TEST_LEN=300
-MICROSLEEP_LEN=4
+TEST_LEN=120
+MICROSLEEP_LEN=5
 TEST_START_TIME=$(date +%s)
 
 print_class(){
@@ -31,21 +31,21 @@ print_class(){
   else
     echo "'$(date +%T)' expect: $EXPECTED, got: NO_FACE" >> "$TEST_FILE"
   fi;
-  sleep 0.5
+  sleep 2
 }
 
 sleep 3
-play "$INIT_TEST_MP3"
+play "$INIT_TEST_MP3" | aplay -q
 echo "---START---" >> "$TEST_FILE"
 while (( $(date +%s) < TEST_START_TIME + TEST_LEN )); do
   sleep "$MICROSLEEP_LEN"
   print_class "AWAKE"
 
-  play "$START_SLEEP_MP3"
+  play -q "$START_SLEEP_MP3" | aplay -q
   sleep "$MICROSLEEP_LEN"
-  play "$STOP_SLEEP_MP3"
+  play -q "$STOP_SLEEP_MP3" | aplay -q
   print_class "DROWSY"
 done
 sleep 2
 echo "---END---" >> "$TEST_FILE"
-play "$END_TEST_MP3"
+play "$END_TEST_MP3" | aplay -q
