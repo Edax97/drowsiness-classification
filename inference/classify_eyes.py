@@ -30,7 +30,7 @@ AWAKE_CLASS="awake"
 DROWSY_CLASS="sleepy"
 NO_CLASS=""
 MIN_ONEEYE_AWAKE_SCORE = 0.6
-MIN_ONEEYE_DROWSY_SCORE = 0.6
+MIN_ONEEYE_DROWSY_SCORE = 0.4
 def decide_category(_left_category: str, _left_score: float, _right_category: str, _right_score: float) -> str:
     if _left_category == _right_category:
         return _left_category
@@ -50,4 +50,6 @@ def decide_category(_left_category: str, _left_score: float, _right_category: st
 def get_status(l_result: ClassificationResult, r_result: ClassificationResult) -> str:
     left_category, left_score = get_result(l_result)
     right_category, right_score = get_result(r_result)
+    print("Left", left_category, left_score)
+    print("Right", right_category, right_score)
     return decide_category(left_category, left_score, right_category, right_score)

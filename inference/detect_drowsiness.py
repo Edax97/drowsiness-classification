@@ -26,7 +26,7 @@ if __name__ == "__main__":
         status = detector.set_status(status)
         alert_detection(status)
 
-    classifier = create_eye_classifier("eyes_model/en0_eye_a.tflite", 0.55, result_cb=result_cb)
+    classifier = create_eye_classifier("eyes_model/en0_eye_a.tflite", 0.45, result_cb=result_cb)
 
     def process_frame(frame: cv.Mat) -> cv.Mat:
         global last_time
