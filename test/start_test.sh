@@ -39,11 +39,10 @@ echo "---START---" >> "$TEST_FILE"
 while (( $(date +%s) < TEST_START_TIME + TEST_LEN )); do
   sleep "$MICROSLEEP_LEN"
   print_class "AWAKE"
-
   play -q "$START_SLEEP_MP3" | aplay -q
   sleep "$MICROSLEEP_LEN"
-  play -q "$STOP_SLEEP_MP3" | aplay -q
   print_class "DROWSY"
+  play -q "$STOP_SLEEP_MP3" | aplay -q
 done
 sleep 2
 echo "---END---" >> "$TEST_FILE"
