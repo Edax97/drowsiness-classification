@@ -8,21 +8,24 @@ class Detection_Header:
         self.awake_class = awake_class
         self.status = INDEFINIDO_DET
         self.score = score
+        self.last_time = 0
 
     def set_status(self, class_name: str, score: float=1) -> str:
         self.detection_history[:-1]= self.detection_history[1:]
         self.detection_history[-1] = class_name
+        if class_name == self.awake_class and score > self.score:
+            self.status = ALERTA_DET
+            return self.status
 
         drowsy_det_num = 0
         for det in self.detection_history:
             if det == self.drowsy_class:
                 drowsy_det_num += 1
-        if drowsy_det_num > 1:
+        if drowsy_det_num > 1 and time.time() - self.last_time > 2:
             self.status = SOMNOLENCIA_DET
+            self.last_time = time.time()
             return self.status
-        if class_name == self.awake_class and score > self.score:
-            self.status = ALERTA_DET
-            return self.status
+
         self.status = INDEFINIDO_DET
         return self.status
 
