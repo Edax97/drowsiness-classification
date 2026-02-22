@@ -24,6 +24,7 @@ def detect_face_mp(frame: cv.Mat):
     lm = faces[0].keypoints
     left_kp = lm[0]
     right_kp = lm[1]
+
     return (True, (x,y,w,h),
             get_eye_coordinates(mp_image.width, mp_image.height, int(w*0.3), left_kp),
             get_eye_coordinates(mp_image.width, mp_image.height, int(w*0.3), right_kp, is_left=False))
@@ -38,8 +39,8 @@ def get_eye_coordinates(img_width: int, img_height: int, window_size: int, kp: N
         h_after = int(window_size*0.6)
     x = center_x - h_prev if center_x > h_prev else 0
     x1 = center_x + h_after if center_x + h_after < img_width else img_width
-    w_top = int(window_size*0.6)
-    w_bottom = int(window_size*0.4)
+    w_top = int(window_size*0.55)
+    w_bottom = int(window_size*0.45)
     y = center_y - w_top if center_y > w_top else 0
     y1 = center_y + w_bottom if center_y + w_bottom < img_height else img_height
     return x,y,x1,y1
