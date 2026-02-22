@@ -13,7 +13,7 @@ TEST_FILE="$(date).test"
 touch "$TEST_FILE"
 
 TEST_LEN=120
-MICROSLEEP_LEN=5
+MICROSLEEP_LEN=6
 TEST_START_TIME=$(date +%s)
 
 print_class(){
@@ -24,14 +24,13 @@ print_class(){
   AWAKE_DET_TIME=$(stat --printf="%Y" "$AWAKE_DET_FILE")
   NOW=$(date +%s)
 
-  if (( DROWSY_DET_TIME + MICROSLEEP_LEN > NOW )); then
+  if (( DROWSY_DET_TIME + MICROSLEEP_LEN> NOW )); then
     echo "'$(date +%T)' expect: $EXPECTED, got: DROWSY" >> "$TEST_FILE"
-  elif (( AWAKE_DET_TIME + MICROSLEEP_LEN > NOW )); then
+  elif (( AWAKE_DET_TIME + MICROSLEEP_LEN  > NOW )); then
     echo "'$(date +%T)' expect: $EXPECTED, got: AWAKE" >> "$TEST_FILE"
   else
     echo "'$(date +%T)' expect: $EXPECTED, got: NO_FACE" >> "$TEST_FILE"
   fi;
-  sleep 2
 }
 
 sleep 3
