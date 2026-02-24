@@ -52,4 +52,5 @@ def get_status(l_result: ClassificationResult, r_result: ClassificationResult) -
     right_category, right_score = get_result(r_result)
     print("Left", left_category, left_score)
     print("Right", right_category, right_score)
+    print("---")
     return decide_category(left_category, left_score, right_category, right_score)
