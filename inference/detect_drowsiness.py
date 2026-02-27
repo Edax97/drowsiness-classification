@@ -43,6 +43,8 @@ if __name__ == "__main__":
             right_roi = frame[r_y:r_y1, r_x:r_x1].copy()
             classify_eyes(classifier, left_roi, right_roi, time_ms)
         drowsy_status = detector.get_status()
+        if drowsy_status == "":
+            drowsy_status = DROWSY_CLASS
         output = cv.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
         cv.rectangle(output, (l_x, l_y), (l_x1, l_y1), (255, 0, 0), 2)
         cv.rectangle(output, (r_x, r_y), (r_x1, r_y1), (255, 0, 0), 2)
