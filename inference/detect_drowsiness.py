@@ -18,8 +18,6 @@ if __name__ == "__main__":
     detector = Detection_Header(DROWSY_CLASS, AWAKE_CLASS)
     left_result: ClassificationResult
     def result_cb(result: ClassificationResult, _: Image, ms: int):
-        time_ms = int(1000 * time.time())
-        print("End classifying eyes", ms, time_ms)
         global left_result
         if ms % 2 == 1:
             left_result = result
@@ -32,13 +30,11 @@ if __name__ == "__main__":
 
     def process_frame(frame: cv.Mat) -> cv.Mat:
         global last_time
-        t_start = time.time()
         detected, (x, y, w, h), (l_x, l_y, l_x1, l_y1), (r_x, r_y, r_x1, r_y1) = detect_face_mp(frame)
         frame = cv.medianBlur(frame, 3)
         if not detected:
             text_overlay(frame, "No face", (60, 20))
             return frame
-        print(f"Face detection latency: {1000*(time.time()-t_start)} ms")
 
         time_ms = int(1000 * time.time())
         if time_ms - last_time > 300:
@@ -50,7 +46,7 @@ if __name__ == "__main__":
         output = cv.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
         cv.rectangle(output, (l_x, l_y), (l_x1, l_y1), (255, 0, 0), 2)
         cv.rectangle(output, (r_x, r_y), (r_x1, r_y1), (255, 0, 0), 2)
-        text_overlay(frame, f"Estado: {drowsy_status}", (20, 40))
+        text_overlay(frame, f"Estado: {drowsy_status}", (120, 80))
         return output
 
     device_id = os.getenv("DEVICE") if os.getenv("DEVICE") else 0
