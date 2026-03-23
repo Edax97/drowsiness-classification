@@ -4,7 +4,7 @@ import cv2
 def find_camera():
     max_indices = 20
     for i in range(max_indices):
-        if i < -2:
+        if i < -1:
             continue
 
         _cap = cv2.VideoCapture(i)
