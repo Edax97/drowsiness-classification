@@ -3,14 +3,17 @@
 /classification/exported*
 /classification/datasets/
 
+/eye-classification
 /eye-classification/face-model/
-/eye-classification/FL3D-eyes/
-/eye-classification/FL3D-eyesbig/
-/eye-classification/MRL/
+/eye-classification/FL3D*
+/eye-classification/MRL*
 /eye-classification/eye-classifier-a/
+/eye-classification/eye-classifier-b
+/eye-classification/eye-classifier-*
 /classifier-exported/
 /inference/*.png
 /inferencia_prod/*.png
+/inferencia_prod/valid
 /inferencia_prod/gafas_videos/
 /test/*.test
 
