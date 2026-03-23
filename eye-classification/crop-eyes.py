@@ -20,9 +20,12 @@ def crop_eyes(images_dir, output_dir, ids: list[str]):
             os.makedirs(os.path.join(output_dir, f"{i}"))
 
         _class_dir_path = os.path.join(images_dir, f"{i}")
-        for f in os.listdir(_class_dir_path):
+        for j, f in enumerate(os.listdir(_class_dir_path)):
             img_path = os.path.join(_class_dir_path, f)
             if isdir(img_path):
+                continue
+
+            if j % 4 > 0 and i == "1":
                 continue
 
             img = cv.imread(f"{img_path}")
@@ -45,6 +48,6 @@ def crop_eyes(images_dir, output_dir, ids: list[str]):
 
 
 if __name__ == "__main__":
-    img_dir = "../classification/datasets/FL3D/data_val"
-    save_dir = "FL3D-eyesbig"
+    img_dir = "../classification/datasets/FL3D/data_train"
+    save_dir = "FL3D-cropped-2"
     crop_eyes(img_dir, save_dir, ["1", "2"])

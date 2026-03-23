@@ -10,4 +10,6 @@
 /eye-classification/eye-classifier-a/
 /classifier-exported/
 /inference/*.png
+/inferencia_prod/*.png
+/inferencia_prod/gafas_videos/
 /test/*.test

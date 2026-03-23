@@ -1,0 +1,81 @@
+- Fatiga
+ -> Duracion de cierre de ojos (2)
+ -> Porcentaje de cierre durante periodo perclose (0.7, 30s)
+ -> Yawn en periodo de sondeo
+
+- Distraccion
+ -> Duracion de distraccion (5)
+
+- Objetos
+ -> Simplemente uso de objetos: cigarro, telefono, cinturon
+
+- Comunicacion UART + SPI
+
+- Plan de implementacion
+
+Variable | Descripcion | Alerta sonido | Notificacion
+-------- | ----------- | ------------- | ------------
+cierre_ojos | cierre continuo | si | no
+bostezo | instancia de bostezo | no | no
+fatiga_perclos | porcentaje durante periodo | no | si
+distraccion | posicion continua | ?/n | si
+objeto_cigarro | cigarro usado | ?/n | si
+objeto_telefono | presencia de telefono usado | ?/n | si
+objeto_cinturon | presencia de cinturon | ?/s | si
+
+- Metodos usados
+cierre_ojos: clasificador sobre region de los ojos (landmarks)
+bostezo: Mouth AR sobre landmarks
+fatiga_perclos: Medicion tiempo sobre cierre de ojos + bostezo
+distraccion: Medicion tiempo sobre head pose incorrecta
+objeto_cigarro: deteccion en area probable obtenida de landmarks (pecho + boca)
+objeto_telefono: deteccion en area probable (cabeza + pecho)
+objeto_cinturon: deteccion en area probable (pecho)
+
+- Pipeline
+image -> [Face mesh] -> landmarks
+
+landmarks, image -> eye_region
+eye_region -> [eye_classifier] -> eye_status
+eye_status -> [medicion de tiempo] -> |cierre_ojos|
+
+landmarks -> [mouth_ar] -> bostezo -> bostezos
+
+bostezos, cierre_ojos -> [medicion de tiempo] -> |fatiga_perclos|
+
+landmarks -> face_pose -> distraction_status -> medicion tiempo -> |distraccion|
+
+image, landmarks -> likely_region_smoke -> |objeto_cigarro|
+image, landmarks -> likely_region_celular -> |objeto_celular|
+image, landmarks -> likely_region_belt -> |objeto_belt|
+
+- Componentes
+
+-----------
+Somnolencia -> cierre_ojos, fatiga perclos
+-----------
+face_mesh -> landmarks | ml*
+classificacion de cierre ojos ->eye_status | ml_custom
+medir tiempo de cierre ->cierre_ojos> | log
+
+determinar bostezo->mouth_status | log
+medir tiempo de bostezo ->yawn | log
+medir fatiga ->fatiga_perclos> | log
+
+-----------
+Distraccion -> distraccion
+-----------
+calculo posicion cabeza ->distraction_status (arriba, abajo, etc) | log
+medir tiempo ->distraccion> | log
+
+-------
+Objetos -> objeto_cigarro, objeto_celular, objeto_belt
+-------
+extraccion de region de interes | log*
+deteccion de objetos-> objeto_cigarro> objeto_celular> objeto_belt> | ml_custom*
+
+
+
+
+
+
