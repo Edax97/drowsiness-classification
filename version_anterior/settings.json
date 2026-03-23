@@ -1,0 +1,22 @@
+{
+    "head_detection_range": 10,
+    "ear_value": 0.20,
+    "mar_value": 0.7,
+    "model_filename": "model_28_08.tflite",
+    "width": 640,
+    "height": 480,
+    "objects": [
+        "cell phone",
+        "cigarro",
+        "celular",
+        "cinturon"
+    ],
+    "model_threshold": 0.4,
+    "distraction_seconds": 5,
+    "fatiga_seconds": 2,
+    "perclos_time": 30,
+    "perclos_percentage": 0.7,
+    "perclos_interval": 0.1,
+    "num_bostesos": 3,
+    "face_id_model": "trained_knn_model_6.clf"
+}
