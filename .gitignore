@@ -13,3 +13,7 @@
 /inferencia_prod/*.png
 /inferencia_prod/gafas_videos/
 /test/*.test
+
+/.venv/
+/.venv_train/
+Validacion.odt
